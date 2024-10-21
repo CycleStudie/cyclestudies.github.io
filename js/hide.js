@@ -1,15 +1,22 @@
-// hide-text.js
+// hide.js
 
-// Function to hide elements containing specific text
 function hideText(text) {
-  // Get all elements containing the specified text
-  var elements = document.querySelectorAll(`:contains("${text}")`);
+  // 获取所有元素
+  var elements = document.getElementsByTagName('*');
 
-  // Loop through each element and remove it
-  elements.forEach(function(element) {
-    element.parentNode.removeChild(element);
-  });
+  // 遍历所有元素
+  for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
+
+    // 检查元素的文本内容是否包含指定的文本
+    if (element.textContent.includes(text)) {
+      // 如果包含，则隐藏该元素
+      element.style.display = 'none';
+    }
+  }
 }
 
-// Call the function with the text to hide
-hideText("Powered by BroadcastChannel & Sepia");
+// 当 DOM 加载完成后执行
+document.addEventListener('DOMContentLoaded', function() {
+  hideText("Powered by");
+});
